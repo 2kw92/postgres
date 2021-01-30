@@ -1,0 +1,15 @@
+- hosts: master,slave
+  roles:
+    - { role: postgres }
+
+- hosts: master
+  roles:
+    - { role: master-setup }
+
+- hosts: slave
+  roles:
+    - { role: slave-setup }
+
+- hosts: master
+  roles:
+    - { role: barman-setup }

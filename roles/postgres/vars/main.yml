@@ -1,0 +1,3 @@
+#postgresql configs
+postgresql_version: "11"
+pg_data: "/var/lib/pgsql/{{ postgresql_version }}/data" 

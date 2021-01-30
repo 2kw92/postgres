@@ -1,0 +1,11 @@
+---
+- name: "Install PostgreSQL packages."
+  yum: 
+    state: latest
+    name:
+      - "postgresql{{ postgresql_version | replace('.', '') }}"
+      - "postgresql{{ postgresql_version | replace('.', '') }}-server"
+      - "postgresql{{ postgresql_version | replace('.', '') }}-contrib"
+      - "postgresql{{ postgresql_version | replace('.', '') }}-libs"
+      - python-psycopg2
+

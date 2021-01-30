@@ -1,0 +1,5 @@
+---
+- name: restart postgres
+  command: /usr/pgsql-{{ postgresql_version }}/bin/pg_ctl -D {{ pg_data }} restart 
+  become: yes
+  become_user: "{{ postgresql_admin_user }}"

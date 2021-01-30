@@ -1,0 +1,5 @@
+#postgresql configs
+postgresql_version: "11"
+pg_data: "/var/lib/pgsql/{{ postgresql_version }}/data" 
+postgresql_admin_user: "postgres"
+postgresql_service: "pg_ctl"

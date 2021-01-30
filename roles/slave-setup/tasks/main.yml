@@ -1,0 +1,27 @@
+---
+
+- name: create backup
+  become: yes
+  become_user: postgres
+  shell: pg_basebackup -U replica -h 192.168.50.1 --pgdata=/var/lib/pgsql/11/data/ -R --slot=replica
+
+- name: copy postgresql config files
+  template:
+    src: '{{ item }}'
+    dest: /var/lib/pgsql/11/data
+    mode: 0600
+    owner: postgres
+    group: postgres
+  with_fileglob: files/*
+
+- name: change owner
+  file:
+    path: "{{ pg_data }}"
+    owner: "{{ postgresql_admin_user }}"
+    group: "{{ postgresql_admin_user }}"
+
+- name: restart postgres pg_ctl
+  command: /usr/pgsql-{{ postgresql_version }}/bin/pg_ctl -D {{ pg_data }} start
+  become: yes
+  become_user: "{{ postgresql_admin_user }}"
+
